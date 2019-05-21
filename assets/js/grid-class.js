@@ -3,6 +3,7 @@ class Grid {
     this.ROWS = 6;
     this.COLUMNS = 7;
     this.selector = selector;
+    this.player = 'red';
     this.generateGrid();
     this.addEventListener();
   }
@@ -32,8 +33,9 @@ class Grid {
   }
   // This method will add an event listener to every cell in the grid on mouse enter
   addEventListener() {
-    // Const $board is assigned the class this.selector (#grid)
-    const $board = $(this.selector);
+    // Const $gameBoard is assigned the class this.selector (#grid)
+    const $gameBoard = $(this.selector);
+    const that = this;
     // The findLastEmptyCell method loops over columns and finds the last empty one
     function findLastEmptyCell(column) {
       const cells = $(`.column[data-column='${column}']`);
@@ -46,18 +48,26 @@ class Grid {
       return null;
     }
     // On mouse enter over a cell that has .column.empty classes do something
-    $board.on("mouseenter", ".column.empty", function() {
+    $gameBoard.on("mouseenter", ".column.empty", function() {
       // The row constant is assigned  the data asigned to the data-row attribute  assigned by the loop above
       const row = $(this).data("row");
       // The column constant is assigned the data asigned to the data-column attribute by the loop above
       const column = $(this).data("column");
-      console.log(column + "");
       const $lastEmptyCell = findLastEmptyCell(column);
-      $lastEmptyCell.addClass("next-red");
+      $lastEmptyCell.addClass(`next-${that.player}`);
     });
     //On mouse leave event the class .next-red is removedd from the cell
-    $board.on("mouseleave", ".column", function() {
-      $(".column").removeClass("next-red");
+    $gameBoard.on("mouseleave", ".column", function() {
+      $(".column").removeClass(`next-${that.player}`);
+    });
+
+    $gameBoard.on("click", ".column.empty", function() {
+      const column = $(this).data("column");
+      const $lastEmptyCell = findLastEmptyCell(column);
+      $lastEmptyCell.removeClass(`empty next-${that.player}`);
+      $lastEmptyCell.addClass(that.player);
+      that.player = (that.player === 'red') ? 'black' : 'red';
+      $(this).trigger('mouseenter');
     });
   }
 }
