@@ -4,12 +4,15 @@ class Grid {
     this.COLUMNS = 7;
     this.selector = selector;
     this.player = "red";
-    this.generateGrid();
+    this.cellNum = 4;
+    this.isGameOver = false;
+    this.playerColor = () => {};
+    this.init();
     this.addEventListener();
     this.checkForWinner();
   }
 
-  generateGrid() {
+  init() {
     // $gameBoard variable is assigned the jQuery selector of the div with the id #grid
     const $gameBoard = $(this.selector);
     // This loop will create a row on each iteration
@@ -50,6 +53,8 @@ class Grid {
     }
     // On mouse enter over a cell that has .column.empty classes do something
     $gameBoard.on("mouseenter", ".column.empty", function() {
+      // Checks if the game is over
+      if (that.isGameOver) return;
       // The column constant is assigned the data asigned to the data-column attribute by the loop above
       const column = $(this).data("column");
       const $lastEmptyCell = findLastEmptyCell(column);
@@ -61,6 +66,8 @@ class Grid {
     });
 
     $gameBoard.on("click", ".column.empty", function() {
+      // Checks if the game is over
+      if (that.isGameOver) return;
       const column = $(this).data("column");
       // Last empty cell clicked on
       const $lastEmptyCell = findLastEmptyCell(column);
@@ -74,11 +81,14 @@ class Grid {
       );
       //Checks if the winner is true;
       if (winner) {
+        that.isGameOver = true;
         alert(`Game over! ${that.player} has won!`);
+        $(".column.empty").removeClass("empty");
         return;
       }
       // Changes to color of the player
       that.player = that.player === "red" ? "black" : "red";
+      that.playerColor();
       $(this).trigger("mouseenter");
     });
   }
@@ -113,7 +123,7 @@ class Grid {
     function checkWin(directionA, directionB) {
       const total = 1 + checkDirection(directionA) + checkDirection(directionB);
 
-      if (total >= 4) {
+      if (total >= that.cellNum) {
         return that.player;
       } else {
         return null;
@@ -141,5 +151,13 @@ class Grid {
       checkDiagonalBLtoTR() ||
       checkDiagonalTLtoBR()
     );
+  }
+
+  restart() {
+    $(this.selector).empty();
+    this.init();
+    this.player = "red";
+    this.isGameOver = false;
+    this.playerColor();
   }
 }
