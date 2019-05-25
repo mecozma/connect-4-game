@@ -1,10 +1,49 @@
 body {
+  font-family: 'Lato', sans-serif;
   text-align: center;
+  background-color: #fff;
+  background-image: linear-gradient(
+      90deg,
+      transparent 79px,
+      #abced4 79px,
+      #abced4 81px,
+      transparent 81px
+    ),
+    linear-gradient(#eee 0.1em, transparent 0.1em);
+  background-size: 100% 1.2em;
+  position: relative;
+}
+
+main {
+  width: 90%;
+  margin: 0 auto;
+}
+
+main h1 {
+  font-size: 2.875em; /*46px / 16px = 1.5em*/
+  padding: 1.04166666666667%;/*10px / 960px*/
+
+}
+
+main p {
+  margin-top: 3.125%;/*30px / 960*/
+  padding: 1.04166666666667%;/*10px / 960px*/
+  font-size: 1.25em;/*20px / 960px*/
+}
+
+main p > span {
+  font-size: 1.3em;/*26 /20*/
+  padding: 1.04166666666667%;/*26 / 960*/
+  border-radius: 50%;
+  color: white;
 }
 
 #grid {
+  border-radius: 10%;
   background-color: #ccc;
   display: inline-block;
+  padding: 1.04166666666667%;/*10px / 960px*/
+  box-shadow: 10px 10px 13px -5px rgba(0,0,0,0.75);
 }
 
 .column {
@@ -12,7 +51,7 @@ body {
   height: 50px;
   display: inline-block;
   border: 1px solid black;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 50%;
   margin: 5px;
 }
@@ -21,16 +60,67 @@ body {
   cursor: pointer;
 }
 
-.next-red{
-  background-color: rgba(255,0,0,.2);
+.next-red {
+  background-color: rgba(255, 0, 0, 0.2);
 }
-.next-black{
-  background-color: rgba(0,0,0,.2);
+.next-black {
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .red {
-  background: radial-gradient(rgb(73, 3, 3), rgb(255,0,0));
+  background: radial-gradient(rgb(73, 3, 3), rgb(255, 0, 0));
 }
 .black {
   background: radial-gradient(rgb(7, 7, 7), rgb(211, 205, 205));
 }
+
+main button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+}
+
+main button:hover {
+  color: rgb(7, 82, 11);
+  font-size: 24px;
+}
+
+footer {
+  margin-top: 20px;
+  background-color: rgba(255, 0, 0, 0.2);
+  width: 100%;
+}
+
+footer p {
+  font-size: 24px;
+  padding: 30px;
+}
+
+footer p a i {
+  font-size: 28px;
+}
+
+footer p a {
+  color: black;
+}
+
+footer p a i:hover {
+  font-size: 36px;
+}
+
+
+@media (max-width: 600px) {
+  main {
+    margin-top: 20px;
+    height: 80vh;
+  }
+  .column {
+    width: 20px;
+    height: 20px;
+  }
+ }
+
+

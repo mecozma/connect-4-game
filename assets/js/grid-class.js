@@ -2,6 +2,7 @@ class Grid {
   constructor(selector) {
     this.ROWS = 6;
     this.COLUMNS = 7;
+    this.ROWSANDCOLUMNS = this.ROWS * this.COLUMNS - 1;
     this.selector = selector;
     this.player = "red";
     this.cellNum = 4;
@@ -67,6 +68,10 @@ class Grid {
 
     $gameBoard.on("click", ".column.empty", function() {
       // Checks if the game is over
+      if (that.ROWSANDCOLUMNS === 0) {
+        alert("GAME OVER! PLAY AGAIN");
+        return;
+      }
       if (that.isGameOver) return;
       const column = $(this).data("column");
       // Last empty cell clicked on
@@ -86,6 +91,9 @@ class Grid {
         $(".column.empty").removeClass("empty");
         return;
       }
+
+      that.ROWSANDCOLUMNS--;
+      console.log(that.ROWSANDCOLUMNS);
       // Changes to color of the player
       that.player = that.player === "red" ? "black" : "red";
       that.playerColor();

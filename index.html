@@ -7,11 +7,34 @@
     <title>Connect 4 Game</title>
     <link rel="stylesheet" href="assets/css/reset.css" />
     <link rel="stylesheet" href="assets/css/my-style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+      integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
-    <p>It is <span>red</span>'s turn</p>
-    <div id="grid"></div>
-    <button>Restart</button>
+    <main>
+      <div class="top">
+        <h1>Connct Four Game</h1>
+        <p>It is <span class="red">red</span>'s turn</p>
+      </div>
+      <button>Play again?</button>
+      <div id="grid"></div>
+    </main>
+    <footer>
+      <p>
+        <a href="https://github.com/mecozma">
+          Hosted with <i class="fas fa-heart"></i> on
+          <i class="fab fa-github"></i>
+        </a>
+      </p>
+    </footer>
     <script src="assets/jQuery/jquery.js"></script>
     <script src="assets/js/grid-class.js"></script>
     <script src="assets/js/script.js"></script>
